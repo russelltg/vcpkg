@@ -7,6 +7,7 @@ vcpkg_from_github(
     PATCHES
         find-link-libraries.patch
         cpl-disable-dll.patch
+        ios-stat.patch
 )
 # `vcpkg clean` stumbles over one subdir
 file(REMOVE_RECURSE "${SOURCE_PATH}/autotest")

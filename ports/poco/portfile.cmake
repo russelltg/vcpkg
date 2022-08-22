@@ -79,7 +79,9 @@ vcpkg_cmake_install()
 vcpkg_copy_pdbs()
 
 # Move apps to the tools folder
-vcpkg_copy_tools(TOOL_NAMES cpspc f2cpsp PocoDoc tec arc AUTO_CLEAN)
+if (NOT VCPKG_CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    vcpkg_copy_tools(TOOL_NAMES cpspc f2cpsp PocoDoc tec arc AUTO_CLEAN)
+endif()
 
 # Copy additional include files not part of any libraries
 if(EXISTS "${CURRENT_PACKAGES_DIR}/include/Poco/SQL")

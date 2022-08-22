@@ -28,7 +28,7 @@
           "features": [
             "opengl"
           ],
-          "platform": "!(windows & arm) & !uwp"
+          "platform": "!(windows & arm) & !uwp & !ios"
         }
       ]
     },

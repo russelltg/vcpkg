@@ -1,0 +1,75 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index c5f77b5..7b5c1a6 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1124,31 +1124,45 @@ if (HDF5_ENABLE_FORMATTERS)
+ endif ()
+ 
+ # execute the H5make_libsettings program
+-add_custom_command (
+-    OUTPUT     gen_SRCS.stamp2
+-    BYPRODUCTS H5lib_settings.c
+-    COMMAND    ${CMAKE_CROSSCOMPILING_EMULATOR} $<TARGET_FILE:H5make_libsettings>
+-    ARGS       H5lib_settings.c
+-    COMMAND    ${CMAKE_COMMAND}
+-    ARGS       -E touch gen_SRCS.stamp2
+-    DEPENDS H5make_libsettings
+-    WORKING_DIRECTORY ${HDF5_SRC_BINARY_DIR}
+-    COMMENT    "Create H5lib_settings.c"
+-)
+-set_source_files_properties (${HDF5_SRC_BINARY_DIR}/H5lib_settings.c PROPERTIES GENERATED TRUE)
+-if (BUILD_SHARED_LIBS)
+-  add_custom_command (
+-      OUTPUT     shared/shared_gen_SRCS.stamp2
+-      BYPRODUCTS shared/H5lib_settings.c
+-      COMMAND    ${CMAKE_COMMAND}
+-      ARGS       -E copy_if_different H5lib_settings.c shared/H5lib_settings.c
+-      COMMAND    ${CMAKE_COMMAND}
+-      ARGS       -E touch shared/shared_gen_SRCS.stamp2
+-      DEPENDS H5make_libsettings gen_SRCS.stamp2
+-      WORKING_DIRECTORY ${HDF5_SRC_BINARY_DIR}
+-      COMMENT    "Copy H5lib_settings.c to shared folder"
+-  )
+-endif ()
++if (NOT EXISTS ${HDF5_USE_PREGEN_DIR}/H5lib_settings.c)
++    add_custom_command (
++        OUTPUT     gen_SRCS.stamp2
++        BYPRODUCTS H5lib_settings.c
++        COMMAND    ${CMAKE_CROSSCOMPILING_EMULATOR} $<TARGET_FILE:H5make_libsettings>
++        ARGS       H5lib_settings.c
++        COMMAND    ${CMAKE_COMMAND}
++        ARGS       -E touch gen_SRCS.stamp2
++        DEPENDS H5make_libsettings
++        WORKING_DIRECTORY ${HDF5_SRC_BINARY_DIR}
++        COMMENT    "Create H5lib_settings.c"
++    )
++    set_source_files_properties (${HDF5_SRC_BINARY_DIR}/H5lib_settings.c PROPERTIES GENERATED TRUE)
++    if (BUILD_SHARED_LIBS)
++    add_custom_command (
++        OUTPUT     shared/shared_gen_SRCS.stamp2
++        BYPRODUCTS shared/H5lib_settings.c
++        COMMAND    ${CMAKE_COMMAND}
++        ARGS       -E copy_if_different H5lib_settings.c shared/H5lib_settings.c
++        COMMAND    ${CMAKE_COMMAND}
++        ARGS       -E touch shared/shared_gen_SRCS.stamp2
++        DEPENDS H5make_libsettings gen_SRCS.stamp2
++        WORKING_DIRECTORY ${HDF5_SRC_BINARY_DIR}
++        COMMENT    "Copy H5lib_settings.c to shared folder"
++    )
++    endif ()
++else()
++    add_custom_command (
++        OUTPUT     gen_SRCS.stamp2
++        BYPRODUCTS H5lib_settings.c COMMAND ls -lah ${HDF5_USE_PREGEN_DIR} COMMAND ls -lah
++        COMMAND    ${CMAKE_COMMAND}
++        ARGS       -E copy_if_different ${HDF5_USE_PREGEN_DIR}/H5lib_settings.c .
++        COMMAND    ${CMAKE_COMMAND}
++        ARGS       -E touch gen_SRCS.stamp2
++        DEPENDS H5make_libsettings
++        WORKING_DIRECTORY ${HDF5_SRC_BINARY_DIR}
++        COMMENT    "Create H5lib_settings.c"
++    )
++endif()
+ 
+ ## all_packages="AC,B,B2,D,F,FA,FL,FS,HL,I,O,S,ST,T,Z"
+ #all_packages="AC,B2,CX,D,F,HL,I,O,S,ST,T,Z"

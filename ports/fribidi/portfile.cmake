@@ -16,6 +16,10 @@ if(VCPKG_CROSSCOMPILING)
     set(options "-Dpregenerated_tab=${gen_tab}")
 endif()
 
+if(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    set(ENV{CFLAGS} "-arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk -miphoneos-version-min=15.5")
+endif()
+
 vcpkg_configure_meson(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
