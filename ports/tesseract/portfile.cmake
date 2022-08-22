@@ -57,7 +57,9 @@ find_dependency(LibArchive)
 ]]
 )
 
-vcpkg_copy_tools(TOOL_NAMES tesseract AUTO_CLEAN)
+if (NOT VCPKG_CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    vcpkg_copy_tools(TOOL_NAMES tesseract AUTO_CLEAN)
+endif()
 
 if(NOT VCPKG_BUILD_TYPE OR VCPKG_BUILD_TYPE STREQUAL "debug")
     vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/debug/lib/pkgconfig/tesseract.pc" "-ltesseract52" "-ltesseract52d")

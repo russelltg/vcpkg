@@ -16,12 +16,20 @@ vcpkg_from_gitlab(
 
 vcpkg_add_to_path(PREPEND "${CURRENT_HOST_INSTALLED_DIR}/tools/gperf")
 
+if(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    set(ENV{CFLAGS} "-DHAVE_SYS_TYPES_H -DHAVE_SYS_STAT_H -DHAVE_FCNTL_H -DHAVE_UNISTD_H -DHAVE_MKSTEMP -DHAVE_RANDOM -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk -miphoneos-version-min=15.5")
+    list(APPEND options
+        "-Dc_link_args=['-isysroot', '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk', '-miphoneos-version-min=15.5']"
+    )
+endif()
+
 vcpkg_configure_meson(
     SOURCE_PATH ${SOURCE_PATH}
     OPTIONS
         -Ddoc=disabled
         -Dcache-build=disabled
         -Dtests=disabled
+        ${options}
 )
 vcpkg_install_meson(ADD_BIN_TO_PATH)
 

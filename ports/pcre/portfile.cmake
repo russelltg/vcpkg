@@ -8,7 +8,8 @@ set(PATCHES
         # Modified for 8.45 from https://bugs.exim.org/show_bug.cgi?id=2600
         pcre-8.45_fix_postfix_for_debug_Windows_builds.patch
         export-cmake-targets.patch
-        pcre-8.4.5_fix_check_function_exists_for_arm-androi_builds.patch)
+        pcre-8.4.5_fix_check_function_exists_for_arm-androi_builds.patch
+        clear-cache-clang.patch)
 
 vcpkg_from_sourceforge(
     OUT_SOURCE_PATH SOURCE_PATH

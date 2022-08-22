@@ -1,0 +1,13 @@
+diff --git a/cmake/helpers/configure.cmake b/cmake/helpers/configure.cmake
+index 652edf1..52757d3 100644
+--- a/cmake/helpers/configure.cmake
++++ b/cmake/helpers/configure.cmake
+@@ -179,7 +179,7 @@ else ()
+     endif ()
+   endif ()
+ 
+-  if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
++  if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin|iOS")
+     if (NOT VSI_FTELL64 AND NOT VSI_FSEEK64)
+       set(VSI_FTELL64 "ftello")
+       set(VSI_FSEEK64 "fseeko")

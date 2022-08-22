@@ -16,6 +16,7 @@ vcpkg_from_github(
         skip-building-libsquish.patch
         fix-intrinsic-function.patch
         fix-release-flags.patch
+        no-march-native-ios.patch
 )
 
 vcpkg_check_features(

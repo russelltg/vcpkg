@@ -1,0 +1,25 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 7b32326..ac8d8a2 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1072,17 +1072,17 @@ if (NOT EXISTS "${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c")
+   endif ()
+ else ()
+   add_custom_command (
+-      OUTPUT     gen_SRCS.stamp1
++      OUTPUT     ${HDF5_GENERATED_SOURCE_DIR}/gen_SRCS.stamp1
+       COMMAND    ${CMAKE_COMMAND}
+       ARGS       -E touch gen_SRCS.stamp1
+-      DEPENDS H5Tinit.c
++      BYPRODUCTS H5Tinit.c
+       WORKING_DIRECTORY ${HDF5_GENERATED_SOURCE_DIR}
+       COMMENT    "Touch existing H5Tinit.c"
+   )
+   set_source_files_properties (${HDF5_GENERATED_SOURCE_DIR}/H5Tinit.c PROPERTIES GENERATED TRUE)
+   if (BUILD_SHARED_LIBS)
+     add_custom_command (
+-        OUTPUT     shared/shared_gen_SRCS.stamp1
++        OUTPUT     ${HDF5_GENERATED_SOURCE_DIR}/shared/shared_gen_SRCS.stamp1
+         BYPRODUCTS shared/H5Tinit.c
+         COMMAND    ${CMAKE_COMMAND}
+         ARGS       -E copy_if_different H5Tinit.c shared/H5Tinit.c
