@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f0083fd..4186e71 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -116,7 +116,7 @@ set_target_properties(shp
+   PROPERTIES 
+   SOVERSION ${shp_SOVERSION}
+   VERSION ${shp_VERSION}
+-  INSTALL_NAME_DIR "${CMAKE_INSTALL_LIBDIR}"
++  # INSTALL_NAME_DIR "${CMAKE_INSTALL_LIBDIR}"
+   )
+ 
+ if(USE_RPATH)
+@@ -148,7 +148,7 @@ set(executables
+ find_program(BASH_EXECUTABLE bash)
+ find_program(SED_EXECUTABLE sed)
+ if(BASH_EXECUTABLE AND SED_EXECUTABLE)
+-  option(BUILD_TEST "" ON)
++  option(BUILD_TEST "" ON)
+ else(BASH_EXECUTABLE AND SED_EXECUTABLE)
+   message(STATUS "WARNING: sed or bash not available so disabling testing")
+ endif(BASH_EXECUTABLE AND SED_EXECUTABLE)
