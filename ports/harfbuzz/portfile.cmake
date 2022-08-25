@@ -36,10 +36,6 @@ list(APPEND FEATURE_OPTIONS -Dfreetype=enabled) #Enable freetype interop helpers
     #list(APPEND FEATURE_OPTIONS -Dgdi=enabled) # enable gdi helpers and uniscribe shaper backend (windows only)
 #endif()
 
-if(VCPKG_CMAKE_SYSTEM_NAME STREQUAL "iOS")
-    set(ENV{CFLAGS} "-arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk -miphoneos-version-min=15.5")
-    set(ENV{CXXFLAGS} "-arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk -miphoneos-version-min=15.5")
-endif()
 
 vcpkg_configure_meson(
     SOURCE_PATH "${SOURCE_PATH}"
