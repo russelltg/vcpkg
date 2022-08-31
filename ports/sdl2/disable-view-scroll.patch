@@ -1,0 +1,20 @@
+diff --git a/src/video/uikit/SDL_uikitview.m b/src/video/uikit/SDL_uikitview.m
+index 77d398c..30d1204 100644
+--- a/src/video/uikit/SDL_uikitview.m
++++ b/src/video/uikit/SDL_uikitview.m
+@@ -457,6 +457,7 @@ - (void)pressesChanged:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)e
+ 
+ -(void)mouseWheelGesture:(UIPanGestureRecognizer *)gesture
+ {
++#if 0
+     if (gesture.state == UIGestureRecognizerStateBegan ||
+         gesture.state == UIGestureRecognizerStateChanged ||
+         gesture.state == UIGestureRecognizerStateEnded) {
+@@ -476,6 +477,7 @@ -(void)mouseWheelGesture:(UIPanGestureRecognizer *)gesture
+             SDL_SendMouseWheel(sdlwindow, 0, velocity.x, velocity.y, SDL_MOUSEWHEEL_NORMAL);
+         }
+     }
++#endif
+ }
+ 
+ #if TARGET_OS_TV

@@ -1,18 +1,19 @@
-set(SDL2_VERSION 2.0.20)
+set(SDL2_VERSION 2.0.24)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO libsdl-org/SDL
-    REF 53dea9830964eee8b5c2a7ee0a65d6e268dc78a1 #vrelease-2.0.22
-    SHA512 809ac18aeb739cfc6558dc11a7b3abbdad62a8e651ae2bfc157f26947b0df063a34c117ea8bd003428b5618fa6ce21a655fda073f1ef15aa34bc4a442a578523
+    REF 8c9beb0c873f6ca5efbd88f1ad2648bfc793b2ac #vrelease-2.0.24
+    SHA512 7936fc3de9920eafe399f5b2af7bf87d479d4ba8c4a7957da90f3a90316dc7a6b8619ffd7a2c198d298d390e1235e00f9bd36fe3f04102bdff351b96c2ade59e
     HEAD_REF master
     PATCHES
-        0001-sdl2-Enable-creation-of-pkg-cfg-file-on-windows.patch
-        0002-sdl2-skip-ibus-on-linux.patch
-        0003-sdl2-disable-sdlmain-target-search-on-uwp.patch
-        0004-Define-crt-macros.patch
-        0005-emscripten-fix-undefined-symbol-errors-in-non-threaded.patch
+        # 0001-sdl2-Enable-creation-of-pkg-cfg-file-on-windows.patch
+        # 0002-sdl2-skip-ibus-on-linux.patch
+        # 0003-sdl2-disable-sdlmain-target-search-on-uwp.patch
+        # 0004-Define-crt-macros.patch
+        # 0005-emscripten-fix-undefined-symbol-errors-in-non-threaded.patch
+        gcmousescroll.patch
+        disable-view-scroll.patch
 )
-
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "static" SDL_STATIC)
 string(COMPARE EQUAL "${VCPKG_LIBRARY_LINKAGE}" "dynamic" SDL_SHARED)
 string(COMPARE EQUAL "${VCPKG_CRT_LINKAGE}" "static" FORCE_STATIC_VCRT)
